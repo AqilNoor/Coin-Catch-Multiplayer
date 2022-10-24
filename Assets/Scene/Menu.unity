@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 673439412}
   - component: {fileID: 673439411}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: coinR3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 713231673}
   - component: {fileID: 713231672}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: coinL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 850879981}
   - component: {fileID: 850879980}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: coinL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 852148012}
   - component: {fileID: 852148011}
   m_Layer: 5
-  m_Name: Image
+  m_Name: coinR2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 901240775}
   - component: {fileID: 901240774}
   m_Layer: 0
-  m_Name: modern-futuristic-sci-fi-background
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 1111764423}
   - component: {fileID: 1111764422}
   m_Layer: 5
-  m_Name: Image
+  m_Name: coinR1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 1174732699}
   - component: {fileID: 1174732698}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Coin Collect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 1532791528}
   - component: {fileID: 1532791527}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: coinL3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

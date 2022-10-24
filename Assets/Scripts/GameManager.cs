@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     // to manage the Score
     int score = 0;
     bool gameOver = false;
@@ -18,84 +19,57 @@ public class GameManager : MonoBehaviour
     // For game over panel
     public GameObject gameOverPanel;
 
-    public static GameManager instance;
+   
 
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        }
+       
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-      
-
+   
     public void IncrementScore()
     {
         if (!gameOver)
         {
             score++;
-            SoundManager.instance.audioSource.PlayOneShot(SoundManager.instance.coinCollect);
+            SoundManager.instance.PlayCoinCollectSound();
             //scoreText is a string = score is int 
             scoreText.text = score.ToString();
-            // print(score);
-
-
         }
-
     }
 
     public void DecreaseLife()
     {
         if (lives > 0)
         { lives--;
-            
-
             // print(lives);
             LiveHlder.transform.GetChild(lives).gameObject.SetActive(false);
         }
         if(lives == 0)
-        { gameOver = true;
-            GameObject bgAudioObject = GameObject.Find("BGAudio");
-            if(bgAudioObject != null)
-            {
-                bgAudioObject.SetActive(false);
-            }
-            SoundManager.instance.audioSource.PlayOneShot(SoundManager.instance.gameOverAudio);
+        { 
+            gameOver = true;
             GameOver();
         }
     }
 
     public void GameOver()
     {
-       
-        CoinSpawner.instance.StopSpawningCoin();
-
-        //  Raja code
-       // GameObject.Find("Player").GetComponent<Player>().canMove = false;
-
-        // Aqil code
-        Player.instance.canMove = false;
+        CoinSpawner.instance.StopSpawningCoin();   
+        GameObject.Find("Player").GetComponent<PlayerController>().canMove = false;
         gameOverPanel.SetActive(true);
-        print("GameOver");
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene("Game");
-
+        SceneManager.LoadScene(1);
     }
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(0);
     }
 
 }

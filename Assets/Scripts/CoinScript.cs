@@ -22,14 +22,12 @@ public class CoinScript : MonoBehaviour
     {
         if (collider.gameObject.tag =="Player")
         {
-
             // increment score
             GameManager.instance.IncrementScore();
             Destroy(gameObject);
         }
         else if (collider.gameObject.tag == "Boundary")
         {
-            SoundManager.instance.audioSource.PlayOneShot(SoundManager.instance.coinLeft);
             // decrement score
             GameManager.instance.DecreaseLife();
             Destroy(gameObject);

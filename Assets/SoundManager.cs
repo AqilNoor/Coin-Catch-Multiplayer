@@ -10,16 +10,25 @@ public class SoundManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
-    }
-    void Start()
-    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        audioSource = GetComponent<AudioSource>();
         
+    }
+    public void PlayCoinCollectSound()
+    {
+        audioSource.PlayOneShot(coinCollect);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayGameOverSound()
     {
-        
+        audioSource.PlayOneShot(gameOverAudio);
+    }
+
+    public void PlayCoinLeftSound()
+    {
+        audioSource.PlayOneShot(coinLeft);
     }
 }
