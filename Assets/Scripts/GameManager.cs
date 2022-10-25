@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         if (!gameOver)
         {
             score++;
-            SoundManager.instance.PlayCoinCollectSound();
+            //SoundManager.instance.PlayCoinCollectSound();
             //scoreText is a string = score is int 
             scoreText.text = score.ToString();
         }
@@ -57,14 +57,15 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        CoinSpawner.instance.StopSpawningCoin();   
+        return;
+        CoinSpawner.instance.StopSpawningCoin();
         GameObject.Find("Player").GetComponent<PlayerController>().canMove = false;
         gameOverPanel.SetActive(true);
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
     public void BackToMenu()

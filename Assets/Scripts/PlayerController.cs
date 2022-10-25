@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
     public bool canMove = true;
     [SerializeField]
     float moveSpeed;
-    
+    PhotonView photonView;
+
+    private void Start()
+    {
+        // to control movement and view of our player
+        photonView = GetComponent<PhotonView>();
+    }
+
     void Update()
     {
-        if (canMove)
+                     // 
+        if (canMove && photonView.IsMine)
         {
             Move();
         }
