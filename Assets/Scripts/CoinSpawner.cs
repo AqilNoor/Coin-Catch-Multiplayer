@@ -28,11 +28,6 @@ public class CoinSpawner : MonoBehaviour
         StartSpawningCoin();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
 
    public void CoinSpawn()
     {
@@ -46,22 +41,16 @@ public class CoinSpawner : MonoBehaviour
 
     IEnumerator SpawnCoins()
     {
-
         yield return new WaitForSeconds(2f);
 
         while (true) {
             CoinSpawn();
             yield return new WaitForSeconds(spawnInterval);
         }
-
-
-
-        
     }
     public void StartSpawningCoin()
     {
         StartCoroutine("SpawnCoins");
-
     }
 
 
@@ -69,5 +58,4 @@ public class CoinSpawner : MonoBehaviour
     {
         StopCoroutine("SpawnCoins");
     }
-
 }

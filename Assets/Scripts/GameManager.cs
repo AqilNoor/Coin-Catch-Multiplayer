@@ -57,15 +57,29 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        return;
         CoinSpawner.instance.StopSpawningCoin();
-        GameObject.Find("Player").GetComponent<PlayerController>().canMove = false;
+        if(SinglePlayerController.instanceSPC.canSinglePlayerMove == true)
+        {
+            SinglePlayerController.instanceSPC.canSinglePlayerMove = false;
+        }
+        else
+        {
+            GameObject.Find("Player").GetComponent<PlayerController>().canMove = false;
+        }
         gameOverPanel.SetActive(true);
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(3);
+        if (SinglePlayerController.instanceSPC.canSinglePlayerMove == false)
+        {
+            SceneManager.LoadScene("Singleplayer");
+        }
+        else
+        {
+            SceneManager.LoadScene("Lobby");
+        }
+        
     }
 
     public void BackToMenu()

@@ -10,7 +10,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     // when a certain event happens  
     private void Start()
     {
-        // Connecting game to the server
         PhotonNetwork.ConnectUsingSettings();
     }
 

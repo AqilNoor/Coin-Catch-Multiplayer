@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    public GameObject Player;
+    private GameObject Player;
     public GameObject playerPrefab;
     public float minX;
     public float maxX;
