@@ -201,9 +201,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CreateJoinRooms, Assembly-CSharp
-        m_MethodName: CreateRoom
+      - m_Target: {fileID: -8267311760628454884}
+        m_TargetAssemblyTypeName: ExistingRoomButton, Assembly-CSharp
+        m_MethodName: OnClickExixtingRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -225,3 +225,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a4cfc849d4fe2469b1b700239a0954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: {fileID: 2932743524272224770}

@@ -12,8 +12,6 @@ public class MainMenu : MonoBehaviour
     public InputField userNameInput;
     public Text buttonText;
     
-
-    
     public void ChooseSingleplayer()
     {
         SceneManager.LoadScene("Singleplayer");
@@ -27,7 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void ConnectToMultiplayer()
     {
-        if (userNameInput.text.Length >= 1)
+        if (!string.IsNullOrWhiteSpace(userNameInput.text))
         {
             PhotonNetwork.NickName = userNameInput.text;
             buttonText.text = "Connecting...";
