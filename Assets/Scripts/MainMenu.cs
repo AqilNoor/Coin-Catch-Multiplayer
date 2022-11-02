@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
         {
             PhotonNetwork.NickName = userNameInput.text;
             buttonText.text = "Connecting...";
-            PhotonNetwork.LoadLevel("Loading");
+            SceneManager.LoadScene("Loading");
         }
     }
     public void Exit()
