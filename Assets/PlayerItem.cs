@@ -18,11 +18,17 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public Image playerAvatar;
     public Sprite[] avatars;
 
+    // Player is pre-made photon type that describes diff players in our game
     Player player;
 
     private void Awake ()
     {
         backgroundImage = GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        player.CustomProperties["playerAvatar"] = 0;
     }
 
     public void SetPlayerInfo(Player _player)
@@ -43,41 +49,61 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     {
         if ((int)playerProperties["playerAvatar"] == 0)
         {
-            playerProperties[playerAvatar] = avatars.Length - 1;
+            playerProperties["playerAvatar"] = avatars.Length - 1;
         }
         else
         {
-            playerProperties[playerAvatar] = (int)playerProperties["playerAvatar"] - 1;
+            playerProperties["playerAvatar"] = (int)playerProperties["playerAvatar"] - 1;
         }
+
+        //notify other players in room custom properties a player has been changed
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
     public void OnClickRightButton()
-    {
-        if ((int)playerProperties["playerAvatar"] == avatars.Length - 1)
+    {   // imageIndex = 0
+        // avatars.Length - 1 = 2
+
+        int imageIndex = (int) playerProperties["playerAvatar"];
+        
+        if ( imageIndex == avatars.Length - 1)
         {
-            playerProperties[playerAvatar] = 0;
+            playerProperties["playerAvatar"] = 0;
         }
         else
         {
-            playerProperties[playerAvatar] = (int)playerProperties["playerAvatar"] + 1;
+            playerProperties["playerAvatar"] = imageIndex + 1;
         }
+
+        //notify other players in room custom properties a player has been changed
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
+        // the player who's properties is changed, will be stored in  targetPlayer
        if(player == targetPlayer)
-        {
+       {
             UpdatePlayerItem(targetPlayer);
-        }
+       }
     }
 
     void UpdatePlayerItem(Player player)
     {
+        // if player with custom properties has playerAvatarImage
         if (player.CustomProperties.ContainsKey("playerAvatar"))
         {
-            playerAvatar.sprite = avatars[(int)player.CustomProperties["playerAvatar"]];
-            playerProperties["playerAvatar"] = (int)player.CustomProperties["playerAvatar"];
+            // setting the sprite equal to (ARRAY) avatar with index player.CustomProperties["playerAvatarImage"]
+            // Since hashtable store data in form of c# objects so when we try
+            // to retrieve any data, we will get c# boxed object 
+            object playerAvatarImageObject = player.CustomProperties["playerAvatar"];
+
+            // Now we will convert this boxed object to int
+            int playerAvatarImageObjectIndex = (int) playerAvatarImageObject;
+
+            playerAvatar.sprite = avatars[playerAvatarImageObjectIndex];
+
+            playerProperties["playerAvatar"] = playerAvatarImageObjectIndex;
         }
         else
         {

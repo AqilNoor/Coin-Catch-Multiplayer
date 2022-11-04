@@ -44,7 +44,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             playButton.SetActive(true);
         }
@@ -56,10 +56,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
+        var roomName = createRoomInputField.text;
+#if UNITY_EDITOR
+        if (string.IsNullOrWhiteSpace(roomName))
+        {
+            roomName = MainMenu.GenerateRandomName();
+        }
+#endif
         // if somthing is written in createRoomInputField
-        if (!string.IsNullOrWhiteSpace(createRoomInputField.text))
-        {                           // enter Room Name           set the max number of player 
-            PhotonNetwork.CreateRoom(createRoomInputField.text, new RoomOptions() { MaxPlayers = 3, BroadcastPropsChangeToAll = true });
+        if (!string.IsNullOrWhiteSpace(roomName))
+        {                           // enter Room Name           set the max number of player        be able to send or receive properties changes info
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions() { MaxPlayers = 3, BroadcastPropsChangeToAll = true });
         }
     }
 
@@ -125,21 +132,28 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void UpdatePlayerList()
     {
+        // first destroy all playerItem in playerItemList and clear the list
         foreach(PlayerItem item in playerItemList)
         {
             Destroy(item.gameObject);
         }
         playerItemList.Clear();
 
+        // if current room is empty, exit from this function
         if (PhotonNetwork.CurrentRoom == null)
             return;
         
-        
+        // taking KeyValuePair from Dictionary PhotonNetwork.CurrentRoom.player 
+        // and storing it inside player variable.
         foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
         { 
+            // instantiating Player and storing it inside newPlayerItem
             PlayerItem newPlayerItem = Instantiate(playerItemPrefb, playerItemParent);
+            
+            // passing player.value to SetPlayerInfo()
             newPlayerItem.SetPlayerInfo(player.Value);
 
+            // if its our player
             if(player.Value == PhotonNetwork.LocalPlayer)
             {
                 newPlayerItem.ApplyLocalChanges();

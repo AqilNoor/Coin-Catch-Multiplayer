@@ -25,9 +25,18 @@ public class MainMenu : MonoBehaviour
 
     public void ConnectToMultiplayer()
     {
-        if (!string.IsNullOrWhiteSpace(userNameInput.text))
+        var inputText = userNameInput.text;
+#if UNITY_EDITOR
+        if (string.IsNullOrWhiteSpace(inputText))
         {
-            PhotonNetwork.NickName = userNameInput.text;
+            inputText = GenerateRandomName();
+            PhotonNetwork.NickName = inputText;
+        }
+#endif
+
+        if (!string.IsNullOrWhiteSpace(inputText))
+        {
+            PhotonNetwork.NickName = inputText;
             buttonText.text = "Connecting...";
             SceneManager.LoadScene("Loading");
         }
@@ -35,5 +44,18 @@ public class MainMenu : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public static string GenerateRandomName()
+    {
+        var randomName = string.Empty;
+
+        for(int i = 0; i < 6; i++)
+        {
+            char charatcer =(char) (Random.Range(97, 123));
+            randomName += charatcer;
+        }
+
+        return randomName;
     }
 }
